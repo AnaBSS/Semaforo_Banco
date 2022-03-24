@@ -4,23 +4,21 @@ import java.util.concurrent.Semaphore;
 import java.util.Random;
 
 public class Banco extends Thread {
-	public String tipo_trans;
-	private int trans;
 	private int conta;
 	private int saldo = new Random().nextInt(10000)+0;
 	private Semaphore smf_saque;
 	private Semaphore smf_deposito;
 	
-	public Banco (int trans, Semaphore smf_saque, Semaphore smf_deposito) {
-		this.trans = trans;
+	public Banco (int conta, Semaphore smf_saque, Semaphore smf_deposito) {
+		this.conta = conta;
 		this.smf_saque = smf_saque;
 		this.smf_deposito = smf_deposito;
 	}
 	
 	public void Run () {
+		int trans = new Random().nextInt(2)+1;
 			switch (trans) {
 			case 1: try {
-				    tipo_trans = "saque";
 				    smf_saque.acquire();
 				    Saque();
 			        break;
@@ -30,7 +28,6 @@ public class Banco extends Thread {
 				     smf_saque.release();
 			       }
 			case 2: try {
-				    tipo_trans = "depostito";
 			        smf_deposito.acquire();
 			        Deposito ();
 			         break;

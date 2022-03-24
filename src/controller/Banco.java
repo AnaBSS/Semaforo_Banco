@@ -21,6 +21,7 @@ public class Banco extends Thread {
 			case 1: try {
 				    smf_saque.acquire();
 				    Saque();
+				    sleep (1000);
 			        break;
 			       }catch (InterruptedException e) {
 				    e.printStackTrace();
@@ -30,6 +31,7 @@ public class Banco extends Thread {
 			case 2: try {
 			        smf_deposito.acquire();
 			        Deposito ();
+			        sleep(1000);
 			         break;
 			       } catch (InterruptedException e) {
 				     e.printStackTrace();
